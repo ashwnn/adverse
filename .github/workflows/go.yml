@@ -1,0 +1,90 @@
+name: adverse-go-ci
+
+on:
+  push:
+    paths:
+      - 'adverse-go/**'
+      - '.github/workflows/go.yml'
+  pull_request:
+    paths:
+      - 'adverse-go/**'
+      - '.github/workflows/go.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: adverse-go
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test (with race detector)
+        run: go test -race ./... -count=1
+
+      - name: Fuzz smoke (wire envelope)
+        run: go test ./internal/wire -run=^$ -fuzz=FuzzParse -fuzztime=20s
+
+      - name: Fuzz smoke (message validation)
+        run: go test ./internal/message -run=^$ -fuzz=FuzzValidate -fuzztime=20s
+
+      # Builds adversed + registryfil and drives the full operator workflow
+      # (hello -> task --wait -> chunked reassembly -> signed kill).
+      - name: Integration tests
+        run: go test ./integration -v -count=1
+
+  macos:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: adverse-go
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./... -count=1
+
+  windows-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: adverse-go
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      # Cross-compile vet catches Windows-only compile errors (syscall/stealth/
+      # registrywin paths) that the Linux build never sees.
+      - name: Vet (GOOS=windows)
+        run: GOOS=windows GOARCH=amd64 go vet ./...
+
+      - name: Build registryfil.exe
+        run: GOOS=windows GOARCH=amd64 go build -o bin/registryfil.exe ./cmd/registryfil
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: adverse-go-binaries
+          path: adverse-go/bin/
+          retention-days: 7

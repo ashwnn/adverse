@@ -1,0 +1,39 @@
+{
+  "secret": "kat-secret-0001",
+  "secret32": "ac7b320355957f15c8b93ba13660669ee6c195aeec349e4857b3ac42738137dd",
+  "bootstrap_key": "4a894e1ebdd4873648151d0a93643c329410476536dd7365623955a8965ce736",
+  "server_static_pub": "1e9600bb52402dbf616fe7c366b771cd95cffda1afa83376935591ba605c5f75",
+  "kill_sign_pub": "f997222ef5a6ad2698028b93e33bb251bcd61212a62c9bfe42eb662d24c92537",
+  "agent_eph_priv": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "agent_eph_pub": "8f40c5adb68f25624ae5b214ea767a6ec94d829d3d7b5e1ad1ba6f3e2138285f",
+  "server_eph_priv": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+  "server_eph_pub": "358072d6365880d1aeea329adf9121383851ed21a28e3b75e965d0d2cd166254",
+  "salt": "000102030405060708090a0b0c0d0e0f",
+  "agent_id": "agent-kat-1",
+  "handshake_key": "f29487c94169f3899dd923828c1474a2a0e39983ae0e7f7f7f895db92eb5aded",
+  "session_key_fs": "97773967d6ca70cd2c6ef404e095db66c11b0d6afade3f724b39315ce231b4fb",
+  "frame_prefix": "1b182a",
+  "frame_prefix_fs": "4b2897",
+  "kill": {
+    "epoch": 42,
+    "agent_id": "agent-kat-1",
+    "payload": "kill",
+    "sig": "b47b6829867fbd4556ce89be1bc4edfcff92b449b16ada6a1f18e6a738677f145f9e3f91e4165bbc6819ca43392cda3e5c1ab78b6343e864e5de1086d76ff201"
+  },
+  "aead": {
+    "key": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "nonce": "000102030405060708090a0b",
+    "aad": "kat-aad",
+    "plaintext": "kat-plaintext",
+    "sealed": "e29a7c2d597bc429d9f75a8bec953887eba25f97fc6da03acbd0687550"
+  },
+  "envelope": {
+    "key": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "prefix": "5031",
+    "aad": "agent-kat-1:out",
+    "seq": 42,
+    "direction": 0,
+    "plaintext": "kat-plaintext",
+    "frame": "50310000002a00000029000000000000002a00000000b602c04ee0641b08a8ea7e082074bc1f33dc234e1c10f664174160fae9"
+  }
+}

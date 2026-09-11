@@ -1,0 +1,69 @@
+# Go - build outputs
+bin/
+adverse-go/bin/
+adverse-go/adversed
+adverse-go/registryfil
+adverse-go/registryfil.exe
+# tools built with `go build ./tools/...` (or -o) land at module root
+adverse-go/polymorph
+adverse-go/polymorph.exe
+adverse-go/stringcrypt
+adverse-go/stringcrypt.exe
+*.test
+coverage.out
+coverage.html
+
+# Smoke / lab artifacts (transient, never commit)
+smoke_*.log
+*.log
+
+# Python / Node tooling caches
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+.pytest_cache/
+node_modules/
+
+# Environment / secrets (never commit)
+.env
+*.env
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+agent.json
+*.agent.json
+
+# Databases
+*.db
+*.sqlite
+
+# ADVERSE state artifacts
+.adverse/
+.agent_state.json
+adverse-go/.agent_state.json
+adverse-go/internal/agent/.agent_state.json
+# Operator / lab artifacts referenced by README + DESIGN (never commit)
+operator-token*.txt
+stub-*.exe
+state.json
+audit.jsonl
+*.obf
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Temp
+/tmp/
+target/
+dist/
+
+# Local coding-agent / editor tooling state (never commit)
+.letta/

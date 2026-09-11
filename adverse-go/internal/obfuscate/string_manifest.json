@@ -1,0 +1,13 @@
+[
+  {"name": "NtdllDLL", "value": "ntdll.dll"},
+  {"name": "NtSaveKey", "value": "NtSaveKey"},
+  {"name": "NtOpenKey", "value": "NtOpenKey"},
+  {"name": "RegMachineSystem", "value": "\\Registry\\Machine\\SYSTEM"},
+  {"name": "AdversaryMagic", "value": "ADVERSARY"},
+  {"name": "SessionV2", "value": "adverse/session/v2"},
+  {"name": "BootstrapMagic", "value": "adverse-bootstrap"},
+  {"name": "AppOctetStream", "value": "application/octet-stream"},
+  {"name": "X25519", "value": "X25519"},
+  {"name": "Chacha20Poly1305", "value": "chacha20poly1305"},
+  {"name": "Golang", "value": "golang"}
+]
